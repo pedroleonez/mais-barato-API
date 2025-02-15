@@ -1,4 +1,4 @@
-package pedroleonez.maisbarato.model;
+package pedroleonez.maisbarato.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;

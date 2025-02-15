@@ -2,7 +2,7 @@ package pedroleonez.maisbarato.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import pedroleonez.maisbarato.model.enums.Unit;
+import pedroleonez.maisbarato.domain.model.enums.Unit;
 
 import java.util.UUID;
 

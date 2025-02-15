@@ -1,4 +1,4 @@
-package pedroleonez.maisbarato.model.enums;
+package pedroleonez.maisbarato.domain.model.enums;
 
 public enum Unit {
     KG,

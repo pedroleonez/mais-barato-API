@@ -1,8 +1,7 @@
-package pedroleonez.maisbarato.model;
+package pedroleonez.maisbarato.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pedroleonez.maisbarato.model.enums.Unit;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -11,12 +10,12 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "TB_PRODUCTS")
+@Table(name = "TB_USERS")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductModel implements Serializable {
+public class UserModel implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -25,20 +24,15 @@ public class ProductModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, length = 60)
     private String name;
 
-    private double price1;
+    @Column(nullable = false, unique = true, length = 100)
+    private String email;
 
-    private double size1;
+    @Column(nullable = false, length = 60)
+    private String password;
 
-    private double price2;
-
-    private double size2;
-
-    @Enumerated(EnumType.STRING)
-    private Unit unit;
-
-    @ManyToMany(mappedBy = "products")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ShoppingListModel> shoppingLists = new LinkedHashSet<>();
 }
