@@ -28,7 +28,7 @@ public class ShoppingListModel implements Serializable {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private UserModel user;
 
     @ManyToMany
