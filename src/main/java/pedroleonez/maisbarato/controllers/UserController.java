@@ -14,6 +14,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping
     public ResponseEntity<String> getUser() {
         return ResponseEntity.ok("success");
     }

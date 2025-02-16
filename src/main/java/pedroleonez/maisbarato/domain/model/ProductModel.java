@@ -38,7 +38,4 @@ public class ProductModel implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Unit unit;
-
-    @ManyToMany(mappedBy = "products")
-    private Set<ShoppingListModel> shoppingLists = new LinkedHashSet<>();
 }
