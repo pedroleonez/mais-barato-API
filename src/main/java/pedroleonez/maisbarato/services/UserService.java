@@ -1,7 +1,7 @@
-package pedroleonez.maisbarato.service;
+package pedroleonez.maisbarato.services;
 
 import org.springframework.stereotype.Service;
-import pedroleonez.maisbarato.repository.UserRepository;
+import pedroleonez.maisbarato.repositories.UserRepository;
 
 @Service
 public class UserService {

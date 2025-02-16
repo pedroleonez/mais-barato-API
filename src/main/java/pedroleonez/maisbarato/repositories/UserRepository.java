@@ -1,7 +1,7 @@
-package pedroleonez.maisbarato.repository;
+package pedroleonez.maisbarato.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pedroleonez.maisbarato.domain.model.UserModel;
+import pedroleonez.maisbarato.domain.models.UserModel;
 
 import java.util.Optional;
 import java.util.UUID;

@@ -4,8 +4,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import pedroleonez.maisbarato.domain.model.UserModel;
-import pedroleonez.maisbarato.repository.UserRepository;
+import pedroleonez.maisbarato.domain.models.UserModel;
+import pedroleonez.maisbarato.repositories.UserRepository;
 
 import java.util.ArrayList;
 

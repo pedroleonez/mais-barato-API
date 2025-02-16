@@ -1,11 +1,12 @@
-package pedroleonez.maisbarato.domain.model;
+package pedroleonez.maisbarato.domain.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pedroleonez.maisbarato.domain.model.enums.Unit;
+import pedroleonez.maisbarato.domain.models.enums.Unit;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
@@ -26,20 +27,20 @@ public class ProductModel implements Serializable {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(nullable = false)
-    private double price1;
+    @Column
+    private BigDecimal price1;
 
-    @Column(nullable = false)
-    private double size1;
+    @Column
+    private BigDecimal size1;
 
-    @Column(nullable = false)
-    private double price2;
+    @Column
+    private BigDecimal price2;
 
-    @Column(nullable = false)
-    private double size2;
+    @Column
+    private BigDecimal size2;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column
     private Unit unit;
 
     @ManyToOne

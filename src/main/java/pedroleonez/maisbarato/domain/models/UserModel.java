@@ -1,4 +1,4 @@
-package pedroleonez.maisbarato.domain.model;
+package pedroleonez.maisbarato.domain.models;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,6 +33,6 @@ public class UserModel implements Serializable {
     @Column(nullable = false, length = 60)
     private String password;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private Set<ProductModel> products = new LinkedHashSet<>();
 }
