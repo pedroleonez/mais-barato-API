@@ -6,8 +6,6 @@ import pedroleonez.maisbarato.domain.model.enums.Unit;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -28,14 +26,23 @@ public class ProductModel implements Serializable {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(nullable = false)
     private double price1;
 
+    @Column(nullable = false)
     private double size1;
 
+    @Column(nullable = false)
     private double price2;
 
+    @Column(nullable = false)
     private double size2;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Unit unit;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserModel user;
 }
