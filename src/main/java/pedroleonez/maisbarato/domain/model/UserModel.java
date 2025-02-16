@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -30,4 +32,7 @@ public class UserModel implements Serializable {
 
     @Column(nullable = false, length = 60)
     private String password;
+
+    @OneToMany
+    private Set<ProductModel> products = new LinkedHashSet<>();
 }
