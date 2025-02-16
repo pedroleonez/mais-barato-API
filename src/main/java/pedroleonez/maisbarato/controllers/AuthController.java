@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pedroleonez.maisbarato.domain.model.UserModel;
-import pedroleonez.maisbarato.dto.LoginRequestDTO;
-import pedroleonez.maisbarato.dto.RegisterRequestDTO;
-import pedroleonez.maisbarato.dto.ResponseDTO;
+import pedroleonez.maisbarato.domain.models.UserModel;
+import pedroleonez.maisbarato.dtos.auth.LoginRequestDTO;
+import pedroleonez.maisbarato.dtos.auth.RegisterRequestDTO;
+import pedroleonez.maisbarato.dtos.auth.ResponseDTO;
 import pedroleonez.maisbarato.infra.security.TokenService;
-import pedroleonez.maisbarato.repository.UserRepository;
+import pedroleonez.maisbarato.repositories.UserRepository;
 
 import java.util.Optional;
 
