@@ -1,5 +1,6 @@
 package pedroleonez.maisbarato.controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pedroleonez.maisbarato.dtos.product.AddProductDTO;
 import pedroleonez.maisbarato.dtos.product.ProductDTO;
@@ -36,6 +37,12 @@ public class ProductController {
     @DeleteMapping("{id}")
     public void deleteProduct(@PathVariable("id") String id) {
         productService.deleteProduct(UUID.fromString(id));
+    }
+
+    @GetMapping("/{id}/best-option")
+    public ResponseEntity<String> getBestOption(@PathVariable UUID id) {
+        String bestOption = productService.getBestOption(id);
+        return ResponseEntity.ok(bestOption);
     }
 }
 
