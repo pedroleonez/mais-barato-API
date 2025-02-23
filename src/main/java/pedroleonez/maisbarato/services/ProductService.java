@@ -5,6 +5,8 @@ import pedroleonez.maisbarato.domain.models.ProductModel;
 import pedroleonez.maisbarato.domain.models.enums.Unit;
 import pedroleonez.maisbarato.dtos.product.AddProductDTO;
 import pedroleonez.maisbarato.dtos.product.ProductDTO;
+import pedroleonez.maisbarato.exception.InvalidProductDataException;
+import pedroleonez.maisbarato.exception.ProductNotFoundException;
 import pedroleonez.maisbarato.repositories.ProductRepository;
 
 import java.util.List;
@@ -21,6 +23,9 @@ public class ProductService {
 
     // utility method to map DTO to ProductModel
     private ProductModel mapDtoToProductModel(ProductModel productModel, AddProductDTO dto) {
+        if (dto.name() == null) {
+            throw new InvalidProductDataException("Missing required product information.");
+        }
         productModel.setName(dto.name());
         productModel.setPrice1(dto.price1());
         productModel.setSize1(dto.size1());
@@ -38,8 +43,12 @@ public class ProductService {
 
     // listProducts
     public List<ProductDTO> listProducts() {
-        return productRepository.findAll()
-                .stream()
+        List<ProductModel> products = productRepository.findAll();
+        if (products.isEmpty()) {
+            throw new ProductNotFoundException("No products found in the database.");
+        }
+
+        return products.stream()
                 .map(product -> new ProductDTO(
                         product.getId(),
                         product.getName(),
@@ -55,7 +64,7 @@ public class ProductService {
     // updateProduct
     public void updateProduct(UUID id, AddProductDTO dto) {
         ProductModel productModel = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
         mapDtoToProductModel(productModel, dto);
         productRepository.save(productModel);
     }
@@ -68,12 +77,12 @@ public class ProductService {
     // compare product sizes and prices
     public String getBestOption(UUID productId) {
         ProductModel product = productRepository.findById(productId)
-                .orElseThrow(() -> new IllegalArgumentException("Product not found"));
+                .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + productId));
 
         // verifica se os preços e tamanhos foram informados
         if (product.getPrice1() == null || product.getSize1() == null ||
                 product.getPrice2() == null || product.getSize2() == null) {
-            return "Not enough information to compare.";
+            throw new InvalidProductDataException("Not enough information to compare.");
         }
 
         // calculates the price per unit
