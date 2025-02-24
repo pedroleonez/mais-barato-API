@@ -1,4 +1,4 @@
-# 💰 Mais Barato
+# 💰 mais-barato-API
 
 **Mais Barato** é uma API RESTful desenvolvida em Java com Spring Boot, criada para ajudar os usuários a comparar produtos e encontrar a melhor opção de compra com base no preço por unidade.
 
@@ -25,8 +25,8 @@
 ### 2️⃣ **Clone o repositório**
 
 ```bash
-git clone https://github.com/pedroleonez/mais-barato.git
-cd mais-barato
+git clone https://github.com/pedroleonez/mais-barato-api.git
+cd mais-barato-api
 ```
 
 ### 3️⃣ **Configure o arquivo `application.properties`**
