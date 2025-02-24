@@ -1,5 +1,6 @@
 package pedroleonez.maisbarato.controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pedroleonez.maisbarato.dtos.product.AddProductDTO;
@@ -20,8 +21,9 @@ public class ProductController {
     }
 
     @PostMapping
-    public void addProduct(@RequestBody AddProductDTO dto) {
+    public ResponseEntity<Void> addProduct(@RequestBody AddProductDTO dto) {
         productService.addProduct(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
@@ -30,13 +32,15 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
-    public void updateProduct(@PathVariable("id") String id, @RequestBody AddProductDTO dto) {
+    public ResponseEntity<Void> updateProduct(@PathVariable("id") String id, @RequestBody AddProductDTO dto) {
         productService.updateProduct(UUID.fromString(id), dto);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("{id}")
-    public void deleteProduct(@PathVariable("id") String id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable("id") String id) {
         productService.deleteProduct(UUID.fromString(id));
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/best-option")
