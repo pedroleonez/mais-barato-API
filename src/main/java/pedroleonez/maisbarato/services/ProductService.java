@@ -71,6 +71,9 @@ public class ProductService {
 
     // deleteProduct
     public void deleteProduct(UUID id) {
+        if (!productRepository.existsById(id)) {
+            throw new ProductNotFoundException("Product not found with id: " + id);
+        }
         productRepository.deleteById(id);
     }
 
