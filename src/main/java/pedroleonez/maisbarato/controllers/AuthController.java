@@ -3,14 +3,12 @@ package pedroleonez.maisbarato.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pedroleonez.maisbarato.domain.models.UserModel;
 import pedroleonez.maisbarato.dtos.auth.LoginRequestDTO;
 import pedroleonez.maisbarato.dtos.auth.RegisterRequestDTO;
 import pedroleonez.maisbarato.dtos.auth.ResponseDTO;
+import pedroleonez.maisbarato.infra.security.RevokedTokenService;
 import pedroleonez.maisbarato.infra.security.TokenService;
 import pedroleonez.maisbarato.repositories.UserRepository;
 
@@ -24,6 +22,7 @@ public class AuthController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
+    private final RevokedTokenService revokedTokenService;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequestDTO body) {
@@ -49,5 +48,15 @@ public class AuthController {
             return ResponseEntity.ok(new ResponseDTO(newUser.getName(), token));
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@RequestHeader("Authorization") String token) {
+        if (token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+
+        RevokedTokenService.logout(token);
+        return ResponseEntity.ok("Logout realizado com sucesso!");
     }
 }
