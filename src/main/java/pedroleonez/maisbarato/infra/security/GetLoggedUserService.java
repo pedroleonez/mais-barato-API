@@ -4,6 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import pedroleonez.maisbarato.domain.models.UserModel;
 
 @Service
 public class GetLoggedUserService {
@@ -16,7 +17,9 @@ public class GetLoggedUserService {
 
         Object principal = authentication.getPrincipal();
 
-        if (principal instanceof UserDetails userDetails) {
+        if (principal instanceof UserModel userModel) {
+            return userModel.getName();
+        } else if (principal instanceof UserDetails userDetails) {
             return userDetails.getUsername();
         } else {
             return principal.toString();
