@@ -9,7 +9,7 @@ public class RevokedTokenService {
     private static RevokedTokenRepository revokedTokenRepository = null;
 
     public RevokedTokenService(RevokedTokenRepository revokedTokenRepository) {
-        this.revokedTokenRepository = revokedTokenRepository;
+        RevokedTokenService.revokedTokenRepository = revokedTokenRepository;
     }
 
     public static void logout(String token) {
