@@ -2,14 +2,12 @@ package pedroleonez.maisbarato.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pedroleonez.maisbarato.domain.models.UserModel;
 import pedroleonez.maisbarato.dtos.auth.LoginRequestDTO;
 import pedroleonez.maisbarato.dtos.auth.RegisterRequestDTO;
 import pedroleonez.maisbarato.dtos.auth.ResponseDTO;
-import pedroleonez.maisbarato.infra.security.GetLoggedUserService;
 import pedroleonez.maisbarato.infra.security.RevokedTokenService;
 import pedroleonez.maisbarato.infra.security.TokenService;
 import pedroleonez.maisbarato.repositories.UserRepository;
@@ -19,13 +17,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class AuthController {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
-    private final RevokedTokenService revokedTokenService;
-    private final GetLoggedUserService getLoggedUserService;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequestDTO body) {
@@ -60,14 +57,6 @@ public class AuthController {
         }
 
         RevokedTokenService.logout(token);
-        return ResponseEntity.ok("Logout realizado com sucesso!");
-    }
-
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/me")
-    public ResponseEntity<String> getLoggedUser() {
-        String username = getLoggedUserService.getLoggedUser();
-
-        return ResponseEntity.ok("Usuário logado: " + username);
+        return ResponseEntity.ok("Logout successful!");
     }
 }
